@@ -4,7 +4,9 @@ import { Typography, Box , useTheme} from '@mui/material';
 const Header = ({title, subtitle}) => {
   const theme = useTheme();
   return (
-    <Box>
+    <Box sx={{
+      ml : "1rem",
+    }}>
       <Typography
         variant="h2"
         color={theme.palette.secondary[200]}
