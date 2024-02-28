@@ -13,6 +13,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material'
+import { Divider} from '@mui/material'
 
 import {
   SettingsOutlined,
@@ -24,7 +25,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import FlexBetween from './FlexBetween'
-import profilImage from '../assets/profile.jpeg'
+import profileImage from '../assets/profile.jpeg'
 
 
 
@@ -34,6 +35,7 @@ const Sidebar = ({
   isSideBarOpen,
   setIsSideBarOpen,
   isNonMobile,
+  user,
 }) => {
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
@@ -139,6 +141,40 @@ const Sidebar = ({
                 );
               })}
             </List>
+          </Box>
+          <Box position="absolute" bottom="2rem">
+            <Divider />
+            <FlexBetween textTransform="none" gap="1rem" m="5px 10px 0 20px">
+              <Box
+                component="img"
+                alt="profile"
+                src={profileImage}
+                height="32px"
+                width="32px"
+                borderRadius="50%"
+                sx={{ objectFit: "cover" }}
+              />
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="20px"
+                  sx={{
+                    color: theme.palette.secondary[200],
+                  }}>
+                  {user.name}
+                </Typography>
+                <Typography
+                  fontSize="14px"
+                  sx={{
+                    color: theme.palette.secondary[200],
+                  }}>
+                  {user.occupation}
+                </Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+              />
+            </FlexBetween>
           </Box>
         </Drawer>
       )}
