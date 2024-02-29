@@ -86,7 +86,7 @@ const Customers = () => {
           rows={data || []}
           columns={columns}
           getRowId={(row) => row._id}
-          defaultPageSize={10}
+          
         />
       </Box>
     </Box>
