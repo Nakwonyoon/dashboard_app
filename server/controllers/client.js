@@ -1,21 +1,43 @@
 import Product from "../models/Product.js";
 import ProductStat from "../models/ProductStat.js";
+import User from "../models/User.js";
 
 
-export const getProducts = async (req, res) => {
+ export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    const productsWithStats = await Promise.all(products.map(async (product) => {
-      const productStat = await ProductStat.find({ 
-        product: product._id 
+
+    const productsWithStats = await Promise.all(
+      products.map(async (product) => {
+        const stat = await ProductStat.find({
+          productId: product._id,
+        });
+           
+        return {
+          ...product._doc,
+          stat,
+        };
       })
-      return {
-        ...product._doc,
-        stats: productStat
-      };
-    }))
+      
+    );
+
+ 
     res.status(200).json(productsWithStats);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getCustomers = async (req, res) => {
+  try {
+    // mongoose method to get all users with role "user" without the password by using "-" in the select method
+    const customers = await User.find({ role: "user" }).select("-password");
+
+    res.status(200).json(customers);
+    
+  } catch (error) {
+    
+  }
+
+
+}

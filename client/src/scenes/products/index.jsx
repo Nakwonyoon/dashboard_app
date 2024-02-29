@@ -12,13 +12,15 @@ const Product = ({
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+  
+
 
   return (
     <Card
       sx={{
         backgroundImage: "none",
         backgroundColor: theme.palette.background.alt,
-        borderRadius: "20px",
+        borderRadius: "0.55rem",
       }}>
       <CardContent>
         <Typography
@@ -54,8 +56,12 @@ const Product = ({
           <CardContent>
             <Typography>id: {_id}</Typography>
             <Typography>supply: {supply}</Typography>
-            <Typography>Yearly Sales This Year: {stat.yearlySalesTotal}</Typography>
-            <Typography>Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}</Typography>
+            <Typography>
+              Yearly Sales This Year: {stat.yearlySalesTotal}
+            </Typography>
+            <Typography>
+              Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
+            </Typography>
           </CardContent>
         </Collapse>
       </CardContent>
@@ -71,18 +77,19 @@ const Products = () => {
   const isNonMobile = useMediaQuery("(min-width: 1000px)")
   
   return (
-    <Box>
+    <Box m="0.5rem 1rem">
       <Header title="PRODUCTS" subtitle="List of all products" />
-      {/* {data || !isLoading ? (
+      {data || !isLoading ? (
         <Box
           mt="20px"
           display="grid"
           gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          justifyContent="space-between"
           rowGap="20px"
           columnGap="1.33%"
           sx={{
             "& > div": {
-              gridColumn: isNonMobile ? "none" : "span 4",
+              gridColumn: isNonMobile ? undefined : "span 4",
             },
           }}>
           {data.map(
@@ -96,25 +103,35 @@ const Products = () => {
               supply,
               stat,
             }) => (
-              <Product 
-              key={_id}
-              _id = {_id}
-              category = {category}
-              name = {name}
-              rating = {rating}
-              description = {description}
-              price = {price}
-              supply = {supply}
-              stat = {stat}
+              <Product
+                key={_id}
+                _id={_id}
+                category={category}
+                name={name}
+                rating={rating}
+                description={description}
+                price={price}
+                supply={supply}
+                stat={stat}
               />
             )
           )}
         </Box>
       ) : (
-        <>
-          <CircularProgress />
-        </>
-      )} */}
+        <Box
+          height="50vh"
+          width="100%"
+          sx={{
+            flexDirection: "column",
+            display: "inline-flex",
+            justifyItems: "center",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+          <Typography>Loading...</Typography>
+          <CircularProgress color="secondary" size="5rem" thickness={5} />
+        </Box>
+      )}
     </Box>
   );
 }
